@@ -1,248 +1,1285 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Adalberto S. Lopes — saúde urbana, atividade física e análise geoespacial.">
-<title>Adalberto S. Lopes | Research & Urban Health</title>
-<style>
-:root{--bg:#f6f5f0;--ink:#213b38;--muted:#606c68;--line:#d8ded6;--accent:#356b58}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 system-ui,sans-serif}
-a{color:inherit;text-decoration:none}
-a:hover{text-decoration:underline;text-underline-offset:5px}
-a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
-.wrap{max-width:1120px;margin:auto;padding:0 28px}
-header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:10}
-nav{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:80px}
-.brand{font-weight:750;letter-spacing:-.6px}
-.menu{display:flex;gap:24px;align-items:center;font-size:14px}
-button{border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 12px;border-radius:5px;cursor:pointer;font:inherit}
-.hero{display:grid;grid-template-columns:1.25fr .8fr;gap:70px;align-items:center;padding:85px 0 90px}
-.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:700}
-h1{font:normal clamp(48px,6vw,78px)/1.06 Georgia,serif;letter-spacing:-2px;margin:24px 0}
-h2{font:normal clamp(32px,4vw,44px)/1.2 Georgia,serif;margin:12px 0 26px}
-h3{font-size:20px;line-height:1.35;margin:0 0 14px}
-p{color:var(--muted);margin:0 0 20px}
-.roles{font-size:15px;color:var(--accent)}
-.portrait{aspect-ratio:4/5;background:#e4e8df;border-radius:120px 8px 8px 8px;overflow:hidden;position:relative}
-.portrait img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.monogram{display:grid;place-items:center;height:100%;font:100px Georgia,serif;color:#718979}
-.caption{font-size:12px;margin-top:12px;color:var(--muted)}
-.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
-.btn{display:inline-block;border:1px solid var(--ink);padding:11px 20px;border-radius:4px;font-size:14px}
-.primary{background:var(--ink);color:white}
-section{padding:65px 0;border-top:1px solid var(--line)}
-.split{display:grid;grid-template-columns:1fr 1.7fr;gap:65px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.card{border-top:2px solid var(--accent);padding-top:22px}
-.card p{font-size:15px}
-.number{font-size:12px;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:20px}
-.profiles{display:grid;grid-template-columns:repeat(2,1fr);gap:0 35px}
-.profiles a{padding:16px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px}
-.profiles a span:last-child{color:var(--accent)}
-.book{background:#e8ece3;padding:36px;border-radius:6px}
-footer{padding:30px 0;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-@media(max-width:760px){
-.wrap{padding:0 22px}
-nav{flex-wrap:wrap;padding:18px 0;gap:12px}
-.menu{gap:15px;flex-wrap:wrap;font-size:12px}
-.hero{grid-template-columns:1fr;padding:48px 0;gap:35px}
-.portrait{max-width:400px}
-.split,.grid{grid-template-columns:1fr;gap:28px}
-.profiles{grid-template-columns:1fr}
-section{padding:45px 0}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102d35">
+  <meta name="description"
+        content="Adalberto S. Lopes — saúde urbana, atividade física, análise de dados e análise geoespacial.">
+
+  <title>Adalberto S. Lopes | Urban Health & Geospatial Analysis</title>
+
+  <style>
+    :root {
+      --background: #f6f5f0;
+      --surface: #ffffff;
+      --ink: #183b40;
+      --muted: #586b6c;
+      --line: #d9e1dc;
+      --accent: #356b58;
+      --dark: #102d35;
+      --peach: #efc0a8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 110px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font: 17px/1.75 system-ui, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #bc7652;
+      outline-offset: 5px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 20px;
+      z-index: 100;
+      background: white;
+      padding: 12px 20px;
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    /* Cabeçalho */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(246, 245, 240, .97);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 92px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .brand:hover {
+      text-decoration: none;
+    }
+
+    .logo {
+      display: block;
+      width: 180px;
+      height: 66px;
+      object-fit: contain;
+    }
+
+    .brand-fallback {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 22px;
+      font-size: 14px;
+      font-weight: 550;
+    }
+
+    .language-button {
+      padding: 8px 13px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .language-button:hover {
+      background: var(--ink);
+      color: white;
+    }
+
+    /* Apresentação */
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      grid-template-columns: 1.2fr .85fr;
+      align-items: center;
+      gap: 58px;
+      margin: 32px 0 56px;
+      padding: 68px 48px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: var(--dark);
+      color: white;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: -25%;
+      z-index: -3;
+      background-image:
+        linear-gradient(rgba(155, 212, 189, .07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(155, 212, 189, .07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      transform: rotate(-12deg);
+      pointer-events: none;
+    }
+
+    .hero-map {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      opacity: .48;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        90deg,
+        rgba(16, 45, 53, .9),
+        rgba(16, 45, 53, .55) 50%,
+        rgba(16, 45, 53, .08)
+      );
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin-bottom: 15px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.3px;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .hero .eyebrow {
+      color: var(--peach);
+    }
+
+    h1 {
+      margin: 20px 0 25px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 6vw, 76px);
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: -2px;
+    }
+
+    .roles {
+      margin-bottom: 24px;
+      color: var(--peach);
+      font-size: 14px;
+      font-weight: 550;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    p {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .hero-description {
+      max-width: 530px;
+      color: #e0eae6;
+      font-size: 17px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 11px 19px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.5;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .button:hover {
+      background: #e8ece6;
+      text-decoration: none;
+    }
+
+    .button-primary {
+      background: var(--ink);
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: #28545a;
+      color: white;
+    }
+
+    .hero .button {
+      border-color: #9dbdb1;
+      color: white;
+    }
+
+    .hero .button:hover {
+      background: #244850;
+    }
+
+    .hero .button-primary {
+      border-color: var(--peach);
+      background: var(--peach);
+      color: var(--dark);
+    }
+
+    .hero .button-primary:hover {
+      background: #f5d4c2;
+    }
+
+    .portrait {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 130px 12px 12px 12px;
+      background: #dce4db;
+    }
+
+    .portrait img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .monogram {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      color: #648276;
+      font: 100px/1 Georgia, serif;
+      background:
+        repeating-radial-gradient(
+          ellipse at 90% 90%,
+          transparent 0 24px,
+          rgba(53, 107, 88, .12) 25px 26px,
+          transparent 27px 42px
+        ),
+        #dce4db;
+    }
+
+    .caption {
+      margin-top: 14px;
+      color: #d2e0da;
+      font-size: 11px;
+      letter-spacing: .5px;
+    }
+
+    /* Seções */
+
+    section {
+      padding: 64px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1.65fr;
+      gap: 65px;
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -.7px;
+    }
+
+    h3 {
+      margin: 0 0 15px;
+      font-size: 20px;
+      line-height: 1.4;
+    }
+
+    .affiliation {
+      padding-left: 18px;
+      border-left: 3px solid var(--peach);
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .research-card {
+      padding: 28px 24px;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--accent);
+      border-radius: 0 0 10px 10px;
+      background: rgba(255, 255, 255, .55);
+    }
+
+    .research-card p {
+      margin-bottom: 0;
+      font-size: 15px;
+    }
+
+    .card-number {
+      display: block;
+      margin-bottom: 24px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .methods {
+      margin-top: 24px;
+      padding: 22px 25px;
+      border-radius: 8px;
+      background: #e9ede5;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .profiles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 30px;
+      align-content: start;
+    }
+
+    .profile-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+    }
+
+    .profile-link:hover {
+      color: var(--accent);
+    }
+
+    .profile-name {
+      display: block;
+      font-weight: 650;
+    }
+
+    .profile-detail {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+      overflow-wrap: anywhere;
+    }
+
+    .arrow {
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .book-panel {
+      padding: 34px;
+      border: 1px solid #d7dfd2;
+      border-radius: 12px;
+      background:
+        repeating-radial-gradient(
+          ellipse at 130% 120%,
+          transparent 0 30px,
+          rgba(53, 107, 88, .06) 31px 32px,
+          transparent 33px 48px
+        ),
+        #e8ece3;
+    }
+
+    .book-tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 4px 10px;
+      border: 1px solid #b7c8b7;
+      border-radius: 4px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .book-title {
+      max-width: 420px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.25;
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Celulares e tablets */
+
+    @media (max-width: 960px) {
+      .menu {
+        gap: 15px;
+        font-size: 13px;
+      }
+
+      .hero {
+        gap: 32px;
+        padding: 48px 32px;
+      }
+
+      .split {
+        gap: 35px;
+      }
+
+      .research-grid {
+        gap: 15px;
+      }
+
+      .research-card {
+        padding: 24px 18px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      html {
+        scroll-padding-top: 155px;
+      }
+
+      .wrap {
+        width: calc(100% - 36px);
+      }
+
+      .navigation {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 0 16px;
+      }
+
+      .logo {
+        width: 145px;
+        height: 48px;
+      }
+
+      .menu {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 10px 17px;
+        font-size: 12px;
+      }
+
+      .language-button {
+        margin-left: auto;
+        padding: 6px 10px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        margin-top: 20px;
+        padding: 38px 25px;
+      }
+
+      h1 {
+        font-size: clamp(45px, 12vw, 68px);
+      }
+
+      .portrait-block {
+        width: min(100%, 360px);
+        margin-inline: auto;
+      }
+
+      .hero::after {
+        background: linear-gradient(
+          180deg,
+          rgba(16, 45, 53, .85),
+          rgba(16, 45, 53, .15)
+        );
+      }
+
+      section {
+        padding: 44px 0;
+      }
+
+      .split,
+      .research-grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .profiles {
+        grid-template-columns: 1fr;
+      }
+
+      .book-panel {
+        padding: 26px;
+      }
+
+      .book-title {
+        font-size: 29px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-<nav class="wrap" aria-label="Principal">
-<a class="brand" href="#home">ADALBERTO S. LOPES</a>
-<div class="menu">
-<a href="#about" data-t="navAbout">Sobre</a>
-<a href="#research" data-t="navResearch">Pesquisas</a>
-<a href="#publications" data-t="navPublications">Publicações</a>
-<a href="#contact" data-t="navContact">Contato</a>
-<button id="language" type="button" aria-label="Switch to English">EN</button>
-</div>
-</nav>
-</header>
+  <a class="skip-link" href="#main" data-t="skip">
+    Ir para o conteúdo
+  </a>
 
-<main class="wrap">
-<div id="home" class="hero">
-<div>
-<div class="eyebrow" data-t="eyebrow">Ciência, saúde e território</div>
-<h1>Adalberto<br>S. Lopes</h1>
-<p class="roles" data-t="roles">Professor e Pesquisador<br>Analista de Dados · Especialista Geoespacial</p>
-<p data-t="intro">Investigando as relações entre cidades, ambiente e saúde por meio da epidemiologia, da análise de dados e das abordagens geoespaciais.</p>
-<div class="actions">
-<a class="btn primary" href="#research" data-t="explore">Conheça minhas pesquisas</a>
-<a class="btn" href="http://lattes.cnpq.br/4860853128807554" target="_blank" rel="noopener noreferrer" data-t="cv">Currículo Lattes ↗</a>
-</div>
-</div>
-<div>
-<div class="portrait">
-<img src="ColorAL26.JPG" alt="Adalberto S. Lopes"
-onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-<div class="monogram" hidden>AL</div>
-</div>
-<div class="caption">UNIPLAC · Lages, Santa Catarina · Brasil</div>
-</div>
-</div>
+  <header>
+    <nav class="navigation wrap" aria-label="Principal">
+      <a class="brand" href="#home"
+         aria-label="Adalberto S. Lopes">
+        <img
+          src="logo.png"
+          alt="Adalberto S. Lopes"
+          class="logo"
+          onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+        <span class="brand-fallback" hidden>
+          ADALBERTO S. LOPES
+        </span>
+      </a>
 
-<section id="about" class="split">
-<div>
-<div class="eyebrow" data-t="aboutLabel">Trajetória acadêmica</div>
-<h2 data-t="aboutTitle">Sobre mim</h2>
-</div>
-<div>
-<p data-t="aboutText">Sou professor e pesquisador do Programa de Pós-Graduação em Ambiente e Saúde da Universidade do Planalto Catarinense (PPGAS/UNIPLAC), em Lages, Santa Catarina.</p>
-<p data-t="aboutText2">Minha atuação reúne saúde urbana, habitabilidade, atividade física, resiliência climática, transporte e planejamento urbano. Utilizo métodos quantitativos e análise geoespacial para investigar como os ambientes se relacionam com a saúde e o cotidiano das populações.</p>
-</div>
-</section>
+      <div class="menu">
+        <a href="#about" data-t="navAbout">Sobre</a>
+        <a href="#research" data-t="navResearch">Pesquisas</a>
+        <a href="#publications" data-t="navPublications">Publicações</a>
+        <a href="#book" data-t="navBook">Livro</a>
+        <a href="#contact" data-t="navContact">Contato</a>
 
-<section id="research">
-<div class="eyebrow" data-t="researchLabel">Áreas de interesse</div>
-<h2 data-t="researchTitle">Cidades, pessoas e saúde</h2>
-<div class="grid">
-<article class="card">
-<span class="number">01</span>
-<h3 data-t="r1Title">Saúde urbana e habitabilidade</h3>
-<p data-t="r1Text">Ambiente construído, condições de vida e características dos territórios relacionadas à saúde e ao bem-estar.</p>
-</article>
-<article class="card">
-<span class="number">02</span>
-<h3 data-t="r2Title">Atividade física e comportamento sedentário</h3>
-<p data-t="r2Text">Epidemiologia da atividade física e investigação dos contextos escolares, comunitários e urbanos.</p>
-</article>
-<article class="card">
-<span class="number">03</span>
-<h3 data-t="r3Title">Clima, mobilidade e território</h3>
-<p data-t="r3Text">Resiliência climática, transporte e planejamento urbano, com apoio de métodos estatísticos e geoespaciais.</p>
-</article>
-</div>
-</section>
+        <button
+          id="language"
+          class="language-button"
+          type="button"
+          aria-label="Switch to English">
+          EN
+        </button>
+      </div>
+    </nav>
+  </header>
 
-<section id="publications" class="split">
-<div>
-<div class="eyebrow" data-t="pubLabel">Produção científica</div>
-<h2 data-t="pubTitle">Publicações e perfis</h2>
-<p data-t="pubText">Consulte artigos, trajetória acadêmica e registros de produção científica nas plataformas abaixo.</p>
-</div>
-<div class="profiles">
-<a href="https://scholar.google.com.br/citations?hl=en&amp;user=BiI51HsAAAAJ" target="_blank" rel="noopener noreferrer"><span>Google Scholar</span><span>↗</span></a>
-<a href="https://www.researchgate.net/profile/Adalberto-Lopes-2" target="_blank" rel="noopener noreferrer"><span>ResearchGate</span><span>↗</span></a>
-<a href="https://orcid.org/0000-0002-3001-6412" target="_blank" rel="noopener noreferrer"><span>ORCID</span><span>↗</span></a>
-<a href="http://lattes.cnpq.br/4860853128807554" target="_blank" rel="noopener noreferrer"><span data-t="cvShort">Currículo Lattes</span><span>↗</span></a>
-<a href="https://www.scopus.com/authid/detail.uri?authorId=57193096391" target="_blank" rel="noopener noreferrer"><span>Scopus Author ID</span><span>↗</span></a>
-<a href="https://www.webofscience.com/wos/author/record/K-7929-2017" target="_blank" rel="noopener noreferrer"><span>Web of Science ResearcherID</span><span>↗</span></a>
-</div>
-</section>
+  <main id="main" class="wrap">
+    <div id="home" class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
 
-<section class="split">
-<div>
-<div class="eyebrow" data-t="bookLabel">Livro em destaque</div>
-<h2>Epidemiologia da<br>Atividade Física</h2>
-</div>
-<div class="book">
-<h3 data-t="bookTitle">Conheça a obra</h3>
-<p data-t="bookText">Acesse a página da editora para consultar a sinopse, os detalhes da publicação e as opções de compra.</p>
-<a class="btn primary" href="https://livrariaintersaberes.com.br/produto/epidemiologia-da-atividade-fisica" target="_blank" rel="noopener noreferrer" data-t="buy">Comprar livro ↗</a>
-</div>
-</section>
+      <!-- Elementos cartográficos decorativos, sem dados reais. -->
+      <svg
+        class="hero-map"
+        viewBox="0 0 1100 700"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+        focusable="false">
 
-<section id="contact" class="split">
-<div>
-<div class="eyebrow" data-t="contactLabel">Conexões</div>
-<h2 data-t="contactTitle">Vamos conversar</h2>
-</div>
-<div>
-<p data-t="contactText">Para contatos profissionais e conversas sobre pesquisa, ensino e análise de dados, acesse meu LinkedIn ou os demais canais.</p>
-<div class="actions">
-<a class="btn primary" href="https://www.linkedin.com/in/aadalberto" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-<a class="btn" href="https://linktr.ee/aadalberto" target="_blank" rel="noopener noreferrer" data-t="allLinks">Todos os links ↗</a>
-</div>
-</div>
-</section>
-</main>
+        <g fill="none" stroke="#9bd4bd" stroke-width="1.2">
+          <path d="M540 -50 C350 100 820 130 620 300 S420 500 820 760"/>
+          <path d="M580 -50 C390 100 860 130 660 300 S460 500 860 760"/>
+          <path d="M620 -50 C430 100 900 130 700 300 S500 500 900 760"/>
+          <path d="M660 -50 C470 100 940 130 740 300 S540 500 940 760"/>
+          <path d="M700 -50 C510 100 980 130 780 300 S580 500 980 760"/>
+          <path d="M740 -50 C550 100 1020 130 820 300 S620 500 1020 760"/>
+          <path d="M780 -50 C590 100 1060 130 860 300 S660 500 1060 760"/>
+          <path d="M820 -50 C630 100 1100 130 900 300 S700 500 1100 760"/>
+          <path d="M860 -50 C670 100 1140 130 940 300 S740 500 1140 760"/>
+        </g>
 
-<footer>
-<div class="wrap">© <span id="year"></span> Adalberto S. Lopes · Lages, SC, Brasil</div>
-</footer>
+        <g fill="none" stroke="#efc0a8" stroke-width="1.5"
+           stroke-dasharray="5 7" opacity=".8">
+          <path d="M100 560 L350 420 L580 490 L840 260 L1030 350"/>
+          <path d="M350 420 L440 180 L840 260"/>
+        </g>
 
-<script>
-const translations={
-pt:{
-navAbout:"Sobre",navResearch:"Pesquisas",navPublications:"Publicações",navContact:"Contato",
-eyebrow:"Ciência, saúde e território",
-roles:"Professor e Pesquisador\nAnalista de Dados · Especialista Geoespacial",
-intro:"Investigando as relações entre cidades, ambiente e saúde por meio da epidemiologia, da análise de dados e das abordagens geoespaciais.",
-explore:"Conheça minhas pesquisas",cv:"Currículo Lattes ↗",cvShort:"Currículo Lattes",
-aboutLabel:"Trajetória acadêmica",aboutTitle:"Sobre mim",
-aboutText:"Sou professor e pesquisador do Programa de Pós-Graduação em Ambiente e Saúde da Universidade do Planalto Catarinense (PPGAS/UNIPLAC), em Lages, Santa Catarina.",
-aboutText2:"Minha atuação reúne saúde urbana, habitabilidade, atividade física, resiliência climática, transporte e planejamento urbano. Utilizo métodos quantitativos e análise geoespacial para investigar como os ambientes se relacionam com a saúde e o cotidiano das populações.",
-researchLabel:"Áreas de interesse",researchTitle:"Cidades, pessoas e saúde",
-r1Title:"Saúde urbana e habitabilidade",
-r1Text:"Ambiente construído, condições de vida e características dos territórios relacionadas à saúde e ao bem-estar.",
-r2Title:"Atividade física e comportamento sedentário",
-r2Text:"Epidemiologia da atividade física e investigação dos contextos escolares, comunitários e urbanos.",
-r3Title:"Clima, mobilidade e território",
-r3Text:"Resiliência climática, transporte e planejamento urbano, com apoio de métodos estatísticos e geoespaciais.",
-pubLabel:"Produção científica",pubTitle:"Publicações e perfis",
-pubText:"Consulte artigos, trajetória acadêmica e registros de produção científica nas plataformas abaixo.",
-bookLabel:"Livro em destaque",bookTitle:"Conheça a obra",
-bookText:"Acesse a página da editora para consultar a sinopse, os detalhes da publicação e as opções de compra.",
-buy:"Comprar livro ↗",contactLabel:"Conexões",contactTitle:"Vamos conversar",
-contactText:"Para contatos profissionais e conversas sobre pesquisa, ensino e análise de dados, acesse meu LinkedIn ou os demais canais.",
-allLinks:"Todos os links ↗"
-},
-en:{
-navAbout:"About",navResearch:"Research",navPublications:"Publications",navContact:"Contact",
-eyebrow:"Science, health and place",
-roles:"Professor & Researcher\nData Analyst · Geospatial Specialist",
-intro:"Exploring the relationships between cities, environment and health through epidemiology, data analysis and geospatial approaches.",
-explore:"Explore my research",cv:"Lattes CV ↗",cvShort:"Lattes CV",
-aboutLabel:"Academic background",aboutTitle:"About me",
-aboutText:"I am a professor and researcher in the Graduate Program in Environment and Health at Universidade do Planalto Catarinense (PPGAS/UNIPLAC), in Lages, Santa Catarina, Brazil.",
-aboutText2:"My work spans urban health, liveability, physical activity, climate resilience, transportation and urban planning. I use quantitative methods and geospatial analysis to investigate how environments relate to population health and everyday life.",
-researchLabel:"Research interests",researchTitle:"Cities, people and health",
-r1Title:"Urban health and liveability",
-r1Text:"Built environments, living conditions and place characteristics related to health and well-being.",
-r2Title:"Physical activity and sedentary behaviour",
-r2Text:"Physical activity epidemiology and research across school, community and urban settings.",
-r3Title:"Climate, mobility and place",
-r3Text:"Climate resilience, transportation and urban planning, supported by statistical and geospatial methods.",
-pubLabel:"Scientific output",pubTitle:"Publications and profiles",
-pubText:"Explore publications, academic background and research records through the platforms below.",
-bookLabel:"Featured book",bookTitle:"Explore the book",
-bookText:"Visit the publisher’s page for the synopsis, publication details and purchase options. The book is in Portuguese.",
-buy:"Buy the book ↗",contactLabel:"Connect",contactTitle:"Let’s connect",
-contactText:"For professional enquiries and conversations about research, teaching and data analysis, connect through LinkedIn or my other channels.",
-allLinks:"All links ↗"
-}};
-let current="pt";
-function setLanguage(lang){
-current=lang;
-document.documentElement.lang=lang==="pt"?"pt-BR":"en";
-document.querySelectorAll("[data-t]").forEach(el=>{
-el.textContent=translations[lang][el.dataset.t];
-});
-document.querySelector(".roles").style.whiteSpace="pre-line";
-const btn=document.getElementById("language");
-btn.textContent=lang==="pt"?"EN":"PT";
-btn.setAttribute("aria-label",lang==="pt"?"Switch to English":"Mudar para português");
-try{localStorage.setItem("language",lang)}catch(e){}
-}
-document.getElementById("language").addEventListener("click",()=>{
-setLanguage(current==="pt"?"en":"pt");
-});
-document.getElementById("year").textContent=new Date().getFullYear();
-let initial="pt";
-try{if(localStorage.getItem("language")==="en")initial="en"}catch(e){}
-setLanguage(initial);
-</script>
+        <g fill="#efc0a8">
+          <circle cx="100" cy="560" r="5"/>
+          <circle cx="350" cy="420" r="6"/>
+          <circle cx="580" cy="490" r="5"/>
+          <circle cx="840" cy="260" r="7"/>
+          <circle cx="1030" cy="350" r="5"/>
+          <circle cx="440" cy="180" r="5"/>
+        </g>
+
+        <g fill="none" stroke="#efc0a8" opacity=".6">
+          <circle cx="350" cy="420" r="16"/>
+          <circle cx="840" cy="260" r="21"/>
+          <circle cx="840" cy="260" r="33"/>
+        </g>
+      </svg>
+
+      <div>
+        <div class="eyebrow" data-t="eyebrow">
+          Ciência, saúde e território
+        </div>
+
+        <h1>Adalberto<br>S. Lopes</h1>
+
+        <p class="roles" data-t="roles">Professor e Pesquisador
+Analista de Dados · Especialista Geoespacial</p>
+
+        <p class="hero-description" data-t="intro">
+          Investigando as relações entre cidades, ambiente e saúde
+          por meio da epidemiologia, da análise de dados e das
+          abordagens geoespaciais.
+        </p>
+
+        <div class="actions">
+          <a class="button button-primary"
+             href="#research"
+             data-t="explore">
+            Conheça minhas pesquisas
+          </a>
+
+          <a class="button"
+             href="http://lattes.cnpq.br/4860853128807554"
+             target="_blank"
+             rel="noopener noreferrer"
+             data-t="cv">
+            Currículo Lattes ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="portrait-block">
+        <div class="portrait">
+          <img
+            src="ColorAL26.JPG"
+            alt="Adalberto S. Lopes"
+            width="640"
+            height="800"
+            fetchpriority="high"
+            onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+
+          <div class="monogram" hidden>AL</div>
+        </div>
+
+        <div class="caption" data-t="location">
+          UNIPLAC · Lages, Santa Catarina · Brasil
+        </div>
+      </div>
+    </div>
+
+    <section id="about" class="split">
+      <div>
+        <div class="eyebrow" data-t="aboutLabel">
+          Trajetória acadêmica
+        </div>
+
+        <h2 data-t="aboutTitle">Sobre mim</h2>
+
+        <p class="affiliation" data-t="affiliation">
+          Programa de Pós-Graduação em Ambiente e Saúde
+          · PPGAS/UNIPLAC
+        </p>
+      </div>
+
+      <div>
+        <p data-t="aboutText">
+          Sou professor e pesquisador do Programa de Pós-Graduação
+          em Ambiente e Saúde da Universidade do Planalto Catarinense
+          (PPGAS/UNIPLAC), em Lages, Santa Catarina.
+        </p>
+
+        <p data-t="aboutText2">
+          Minha atuação reúne saúde urbana, habitabilidade,
+          atividade física, resiliência climática, transporte
+          e planejamento urbano. Utilizo métodos quantitativos
+          e análise geoespacial para investigar como os ambientes
+          se relacionam com a saúde e o cotidiano das populações.
+        </p>
+      </div>
+    </section>
+
+    <section id="research">
+      <div class="eyebrow" data-t="researchLabel">
+        Áreas de interesse
+      </div>
+
+      <h2 data-t="researchTitle">Cidades, pessoas e saúde</h2>
+
+      <div class="research-grid">
+        <article class="research-card">
+          <span class="card-number">01 /</span>
+
+          <h3 data-t="r1Title">
+            Saúde urbana e habitabilidade
+          </h3>
+
+          <p data-t="r1Text">
+            Ambiente construído, condições de vida e características
+            dos territórios relacionadas à saúde e ao bem-estar.
+          </p>
+        </article>
+
+        <article class="research-card">
+          <span class="card-number">02 /</span>
+
+          <h3 data-t="r2Title">
+            Atividade física e comportamento sedentário
+          </h3>
+
+          <p data-t="r2Text">
+            Epidemiologia da atividade física e investigação
+            dos contextos escolares, comunitários e urbanos.
+          </p>
+        </article>
+
+        <article class="research-card">
+          <span class="card-number">03 /</span>
+
+          <h3 data-t="r3Title">
+            Clima, mobilidade e território
+          </h3>
+
+          <p data-t="r3Text">
+            Resiliência climática, transporte e planejamento urbano,
+            com apoio de métodos estatísticos e geoespaciais.
+          </p>
+        </article>
+      </div>
+
+      <div class="methods" data-t="methods">
+        Abordagens: epidemiologia · análise de dados ·
+        geoprocessamento · modelagem estatística
+      </div>
+    </section>
+
+    <section id="publications" class="split">
+      <div>
+        <div class="eyebrow" data-t="pubLabel">
+          Produção científica
+        </div>
+
+        <h2 data-t="pubTitle">Publicações e perfis</h2>
+
+        <p data-t="pubText">
+          Consulte artigos, trajetória acadêmica e registros
+          de produção científica nas plataformas abaixo.
+        </p>
+      </div>
+
+      <div class="profiles">
+        <a class="profile-link"
+           href="https://scholar.google.com.br/citations?hl=en&amp;user=BiI51HsAAAAJ"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span>
+            <span class="profile-name">Google Scholar</span>
+            <span class="profile-detail" data-t="scholarDetail">
+              Publicações e citações
+            </span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="profile-link"
+           href="https://www.researchgate.net/profile/Adalberto-Lopes-2"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span>
+            <span class="profile-name">ResearchGate</span>
+            <span class="profile-detail" data-t="rgDetail">
+              Produção e conexões científicas
+            </span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="profile-link"
+           href="https://orcid.org/0000-0002-3001-6412"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span>
+            <span class="profile-name">ORCID</span>
+            <span class="profile-detail">0000-0002-3001-6412</span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="profile-link"
+           href="http://lattes.cnpq.br/4860853128807554"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span>
+            <span class="profile-name" data-t="cvShort">
+              Currículo Lattes
+            </span>
+            <span class="profile-detail" data-t="lattesDetail">
+              Formação e trajetória acadêmica
+            </span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="profile-link"
+           href="https://www.scopus.com/authid/detail.uri?authorId=57193096391"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span>
+            <span class="profile-name">Scopus Author ID</span>
+            <span class="profile-detail">57193096391</span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="profile-link"
+           href="https://www.webofscience.com/wos/author/record/K-7929-2017"
+           target="_blank"
+           rel="noopener noreferrer">
+          <span>
+            <span class="profile-name">Web of Science</span>
+            <span class="profile-detail">
+              ResearcherID: K-7929-2017
+            </span>
+          </span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="book" class="split">
+      <div>
+        <div class="eyebrow" data-t="bookLabel">
+          Livro em destaque
+        </div>
+
+        <h2 data-t="bookSectionTitle">
+          Conhecimento em circulação
+        </h2>
+
+        <p data-t="bookIntro">
+          Uma conexão entre produção acadêmica, formação
+          e estudo da atividade física.
+        </p>
+      </div>
+
+      <div class="book-panel">
+        <span class="book-tag" data-t="bookTag">
+          Publicação em português
+        </span>
+
+        <h3 class="book-title">
+          Epidemiologia da Atividade Física
+        </h3>
+
+        <p data-t="bookText">
+          Acesse a página da editora para consultar a sinopse,
+          os detalhes da publicação e as opções de compra.
+        </p>
+
+        <a class="button button-primary"
+           href="https://livrariaintersaberes.com.br/produto/epidemiologia-da-atividade-fisica"
+           target="_blank"
+           rel="noopener noreferrer"
+           data-t="buy">
+          Conhecer e comprar o livro ↗
+        </a>
+      </div>
+    </section>
+
+    <section id="contact" class="split">
+      <div>
+        <div class="eyebrow" data-t="contactLabel">
+          Conexões
+        </div>
+
+        <h2 data-t="contactTitle">Vamos conversar</h2>
+      </div>
+
+      <div>
+        <p data-t="contactText">
+          Para contatos profissionais e conversas sobre pesquisa,
+          ensino e análise de dados, acesse meu LinkedIn
+          ou os demais canais.
+        </p>
+
+        <div class="actions">
+          <a class="button button-primary"
+             href="https://www.linkedin.com/in/aadalberto"
+             target="_blank"
+             rel="noopener noreferrer">
+            LinkedIn ↗
+          </a>
+
+          <a class="button"
+             href="https://linktr.ee/aadalberto"
+             target="_blank"
+             rel="noopener noreferrer"
+             data-t="allLinks">
+            Todos os links ↗
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-content">
+      <span>
+        © <span id="year"></span> Adalberto S. Lopes
+      </span>
+
+      <span data-t="footerLocation">
+        Lages · Santa Catarina · Brasil
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      pt: {
+        skip: "Ir para o conteúdo",
+        navAbout: "Sobre",
+        navResearch: "Pesquisas",
+        navPublications: "Publicações",
+        navBook: "Livro",
+        navContact: "Contato",
+
+        eyebrow: "Ciência, saúde e território",
+        roles:
+          "Professor e Pesquisador\n" +
+          "Analista de Dados · Especialista Geoespacial",
+        intro:
+          "Investigando as relações entre cidades, ambiente e saúde " +
+          "por meio da epidemiologia, da análise de dados e das " +
+          "abordagens geoespaciais.",
+        explore: "Conheça minhas pesquisas",
+        cv: "Currículo Lattes ↗",
+        location: "UNIPLAC · Lages, Santa Catarina · Brasil",
+
+        aboutLabel: "Trajetória acadêmica",
+        aboutTitle: "Sobre mim",
+        affiliation:
+          "Programa de Pós-Graduação em Ambiente e Saúde · PPGAS/UNIPLAC",
+        aboutText:
+          "Sou professor e pesquisador do Programa de Pós-Graduação " +
+          "em Ambiente e Saúde da Universidade do Planalto Catarinense " +
+          "(PPGAS/UNIPLAC), em Lages, Santa Catarina.",
+        aboutText2:
+          "Minha atuação reúne saúde urbana, habitabilidade, atividade " +
+          "física, resiliência climática, transporte e planejamento " +
+          "urbano. Utilizo métodos quantitativos e análise geoespacial " +
+          "para investigar como os ambientes se relacionam com a saúde " +
+          "e o cotidiano das populações.",
+
+        researchLabel: "Áreas de interesse",
+        researchTitle: "Cidades, pessoas e saúde",
+        r1Title: "Saúde urbana e habitabilidade",
+        r1Text:
+          "Ambiente construído, condições de vida e características " +
+          "dos territórios relacionadas à saúde e ao bem-estar.",
+        r2Title: "Atividade física e comportamento sedentário",
+        r2Text:
+          "Epidemiologia da atividade física e investigação dos " +
+          "contextos escolares, comunitários e urbanos.",
+        r3Title: "Clima, mobilidade e território",
+        r3Text:
+          "Resiliência climática, transporte e planejamento urbano, " +
+          "com apoio de métodos estatísticos e geoespaciais.",
+        methods:
+          "Abordagens: epidemiologia · análise de dados · " +
+          "geoprocessamento · modelagem estatística",
+
+        pubLabel: "Produção científica",
+        pubTitle: "Publicações e perfis",
+        pubText:
+          "Consulte artigos, trajetória acadêmica e registros de " +
+          "produção científica nas plataformas abaixo.",
+        scholarDetail: "Publicações e citações",
+        rgDetail: "Produção e conexões científicas",
+        cvShort: "Currículo Lattes",
+        lattesDetail: "Formação e trajetória acadêmica",
+
+        bookLabel: "Livro em destaque",
+        bookSectionTitle: "Conhecimento em circulação",
+        bookIntro:
+          "Uma conexão entre produção acadêmica, formação e " +
+          "estudo da atividade física.",
+        bookTag: "Publicação em português",
+        bookText:
+          "Acesse a página da editora para consultar a sinopse, " +
+          "os detalhes da publicação e as opções de compra.",
+        buy: "Conhecer e comprar o livro ↗",
+
+        contactLabel: "Conexões",
+        contactTitle: "Vamos conversar",
+        contactText:
+          "Para contatos profissionais e conversas sobre pesquisa, " +
+          "ensino e análise de dados, acesse meu LinkedIn ou " +
+          "os demais canais.",
+        allLinks: "Todos os links ↗",
+        footerLocation: "Lages · Santa Catarina · Brasil",
+
+        pageTitle:
+          "Adalberto S. Lopes | Saúde Urbana e Análise Geoespacial",
+        pageDescription:
+          "Adalberto S. Lopes — saúde urbana, atividade física, " +
+          "análise de dados e análise geoespacial."
+      },
+
+      en: {
+        skip: "Skip to content",
+        navAbout: "About",
+        navResearch: "Research",
+        navPublications: "Publications",
+        navBook: "Book",
+        navContact: "Contact",
+
+        eyebrow: "Science, health and place",
+        roles:
+          "Professor & Researcher\n" +
+          "Data Analyst · Geospatial Specialist",
+        intro:
+          "Exploring the relationships between cities, environment " +
+          "and health through epidemiology, data analysis and " +
+          "geospatial approaches.",
+        explore: "Explore my research",
+        cv: "Lattes CV ↗",
+        location: "UNIPLAC · Lages, Santa Catarina · Brazil",
+
+        aboutLabel: "Academic background",
+        aboutTitle: "About me",
+        affiliation:
+          "Graduate Program in Environment and Health · PPGAS/UNIPLAC",
+        aboutText:
+          "I am a professor and researcher in the Graduate Program " +
+          "in Environment and Health at Universidade do Planalto " +
+          "Catarinense (PPGAS/UNIPLAC), in Lages, Santa Catarina, Brazil.",
+        aboutText2:
+          "My work spans urban health, liveability, physical activity, " +
+          "climate resilience, transportation and urban planning. " +
+          "I use quantitative methods and geospatial analysis to " +
+          "investigate how environments relate to population health " +
+          "and everyday life.",
+
+        researchLabel: "Research interests",
+        researchTitle: "Cities, people and health",
+        r1Title: "Urban health and liveability",
+        r1Text:
+          "Built environments, living conditions and place " +
+          "characteristics related to health and well-being.",
+        r2Title: "Physical activity and sedentary behaviour",
+        r2Text:
+          "Physical activity epidemiology and research across " +
+          "school, community and urban settings.",
+        r3Title: "Climate, mobility and place",
+        r3Text:
+          "Climate resilience, transportation and urban planning, " +
+          "supported by statistical and geospatial methods.",
+        methods:
+          "Approaches: epidemiology · data analysis · " +
+          "geospatial analysis · statistical modelling",
+
+        pubLabel: "Scientific output",
+        pubTitle: "Publications and profiles",
+        pubText:
+          "Explore publications, academic background and research " +
+          "records through the platforms below.",
+        scholarDetail: "Publications and citations",
+        rgDetail: "Research output and scientific connections",
+        cvShort: "Lattes CV",
+        lattesDetail: "Education and academic background",
+
+        bookLabel: "Featured book",
+        bookSectionTitle: "Sharing knowledge",
+        bookIntro:
+          "Connecting academic work, education and the study " +
+          "of physical activity.",
+        bookTag: "Published in Portuguese",
+        bookText:
+          "Visit the publisher’s page for the synopsis, " +
+          "publication details and purchase options.",
+        buy: "Explore and buy the book ↗",
+
+        contactLabel: "Connect",
+        contactTitle: "Let’s connect",
+        contactText:
+          "For professional enquiries and conversations about " +
+          "research, teaching and data analysis, connect through " +
+          "LinkedIn or my other channels.",
+        allLinks: "All links ↗",
+        footerLocation: "Lages · Santa Catarina · Brazil",
+
+        pageTitle:
+          "Adalberto S. Lopes | Urban Health & Geospatial Analysis",
+        pageDescription:
+          "Adalberto S. Lopes — urban health, physical activity, " +
+          "data analysis and geospatial analysis."
+      }
+    };
+
+    let currentLanguage = "pt";
+
+    function setLanguage(language) {
+      if (!translations[language]) {
+        language = "pt";
+      }
+
+      currentLanguage = language;
+
+      document.documentElement.lang =
+        language === "pt" ? "pt-BR" : "en";
+
+      document.querySelectorAll("[data-t]").forEach(function(element) {
+        const key = element.dataset.t;
+
+        if (translations[language][key] !== undefined) {
+          element.textContent = translations[language][key];
+        }
+      });
+
+      const languageButton = document.getElementById("language");
+
+      languageButton.textContent = language === "pt" ? "EN" : "PT";
+
+      languageButton.setAttribute(
+        "aria-label",
+        language === "pt"
+          ? "Switch to English"
+          : "Mudar para português"
+      );
+
+      document.querySelector("nav").setAttribute(
+        "aria-label",
+        language === "pt" ? "Principal" : "Main"
+      );
+
+      document.title = translations[language].pageTitle;
+
+      document.querySelector('meta[name="description"]').setAttribute(
+        "content",
+        translations[language].pageDescription
+      );
+
+      try {
+        localStorage.setItem("preferredLanguage", language);
+      } catch (error) {
+        // A troca de idioma funciona mesmo sem armazenamento local.
+      }
+    }
+
+    document.getElementById("language").addEventListener(
+      "click",
+      function() {
+        setLanguage(currentLanguage === "pt" ? "en" : "pt");
+      }
+    );
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    let initialLanguage = "pt";
+
+    try {
+      const savedLanguage = localStorage.getItem("preferredLanguage");
+
+      if (savedLanguage === "pt" || savedLanguage === "en") {
+        initialLanguage = savedLanguage;
+      }
+    } catch (error) {
+      // Português é o idioma inicial quando não há preferência salva.
+    }
+
+    setLanguage(initialLanguage);
+  </script>
 </body>
 </html>
